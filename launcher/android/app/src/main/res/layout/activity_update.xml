@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/ghr_bg"
+    android:gravity="center"
+    android:padding="@dimen/screen_padding">
+
+    <TextView
+        android:id="@+id/phaseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phase_fetch_manifest"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/ghr_text" />
+
+    <TextView
+        android:id="@+id/detailText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="@color/ghr_text_muted"
+        android:textSize="@dimen/subtitle_size" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:progressTint="@color/ghr_primary"
+        android:progressBackgroundTint="@color/ghr_divider" />
+
+    <Button
+        android:id="@+id/actionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_btn_primary"
+        android:text="@string/action_play"
+        android:textColor="@color/ghr_bg"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,9 @@
+{
+  "project": "Grand Horizon RP",
+  "server_host": "142.132.203.47",
+  "server_port": 14448,
+  "manifest_url": "https://cdn.grandhorizonrp.example/manifest.json",
+  "launcher_version": "1.0.0",
+  "website_url": "https://grandhorizonrp.example",
+  "discord_url": ""
+}

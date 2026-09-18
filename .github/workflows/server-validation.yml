@@ -1,0 +1,56 @@
+name: Server Validation (SA-MP config)
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'server/**'
+      - '.github/workflows/server-validation.yml'
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    name: Validate server config
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check server.cfg present + branded
+        run: |
+          test -f server/server.cfg || { echo "::error::server.cfg missing"; exit 1; }
+          grep -q '^hostname Grand Horizon RP' server/server.cfg || \
+            { echo "::error::server.cfg hostname not branded Grand Horizon RP"; exit 1; }
+          echo "✓ server.cfg hostname branded"
+
+      - name: Check gamemode source branded
+        run: |
+          test -f server/gamemodes/laird.pwn || { echo "::error::laird.pwn missing"; exit 1; }
+          grep -q '#define SERVER_NAME 	"GRAND HORIZON RP"' server/gamemodes/laird.pwn || \
+            { echo "::error::SERVER_NAME macro not branded"; exit 1; }
+          echo "✓ SERVER_NAME macro branded"
+
+      - name: Check no leftover ELITE branding in laird.pwn
+        run: |
+          if grep -q 'ELITE MOBILE RP' server/gamemodes/laird.pwn; then
+            echo "::warning::residual 'ELITE MOBILE RP' references found:"
+            grep -n 'ELITE MOBILE RP' server/gamemodes/laird.pwn
+            exit 1
+          fi
+          echo "✓ no ELITE MOBILE RP leftovers in laird.pwn"
+
+      - name: Check plugins present
+        run: |
+          for p in mysql_static pawnraknet pawncmd sscanf streamer sampvoice; do
+            if ! ls server/plugins/*.so 2>/dev/null | grep -qi "$p"; then
+              echo "::error::missing plugin .so: $p"; exit 1
+            fi
+          done
+          echo "✓ required Linux plugins present"
+
+      - name: Report (do not recompile — no pawncc on runner)
+        run: |
+          echo "Note: laird.amx recompile must happen on the lemehost server (pawncc not on CI runner)."
+          echo "Static config validation complete."

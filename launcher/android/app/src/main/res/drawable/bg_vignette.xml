@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reproduces the LauncherScreen.xaml "Fade" rectangle gradient:
+     top #54000000 -> mid transparent -> bottom #19000000 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="@color/ghr_vignette_top"
+        android:centerColor="@color/ghr_vignette_mid"
+        android:endColor="@color/ghr_vignette_bottom"
+        android:type="linear" />
+</shape>

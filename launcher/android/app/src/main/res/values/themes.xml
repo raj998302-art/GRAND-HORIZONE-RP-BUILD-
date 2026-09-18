@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GrandHorizonRP" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/ghr_primary</item>
+        <item name="colorOnPrimary">@color/ghr_bg</item>
+        <item name="android:colorBackground">@color/ghr_bg</item>
+        <item name="android:windowBackground">@color/ghr_bg</item>
+        <item name="android:textColorPrimary">@color/ghr_text</item>
+        <item name="android:textColorSecondary">@color/ghr_text_muted</item>
+    </style>
+    <style name="Theme.GrandHorizonRP.Splash" parent="Theme.GrandHorizonRP">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/ghr_bg</item>
+    </style>
+</resources>

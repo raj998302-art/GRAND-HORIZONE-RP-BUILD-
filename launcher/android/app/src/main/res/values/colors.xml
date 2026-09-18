@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ghr_bg">#0D0D0D</color>            <!-- matches original SplashScreen.xaml Background="#FF0D0D0D" -->
+    <color name="ghr_bg_elevated">#121821</color>
+    <color name="ghr_surface">#1A2230</color>
+    <color name="ghr_primary">#E0B26B</color>          <!-- horizon gold -->
+    <color name="ghr_primary_dark">#8A6A33</color>
+    <color name="ghr_accent">#3FBFA7</color>             <!-- teal -->
+    <color name="ghr_text">#F2F4F7</color>
+    <color name="ghr_text_muted">#9AA6B2</color>
+    <color name="ghr_online">#37D67A</color>
+    <color name="ghr_offline">#E05A5A</color>
+    <color name="ghr_divider">#26313F</color>
+    <color name="ghr_vignette_top">#54000000</color>     <!-- matches LauncherScreen.xaml gradient stop -->
+    <color name="ghr_vignette_mid">#00000000</color>
+    <color name="ghr_vignette_bottom">#19000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+</resources>

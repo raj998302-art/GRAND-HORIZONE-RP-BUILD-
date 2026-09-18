@@ -1,0 +1,40 @@
+# Secrets & credentials — NEVER commit
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+*.pem
+keystore.properties
+local.properties
+google-services.json
+secrets.json
+
+# Tokens (safety net for any pasted credential)
+*.token
+gh-token-*
+
+# Android build outputs
+**/build/
+.gradle/
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+release/
+hs_err_pid*
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Large client assets (CDN/LFS only — never git blobs)
+*.obb
+*.bpc
+*.tmb
+# Keep the manifest generator + schema, but not the actual content packs
+!deployment/update-manifest/**

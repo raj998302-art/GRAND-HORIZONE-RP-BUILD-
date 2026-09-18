@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Grand Horizon RP</string>
+    <string name="launcher_title">Grand Horizon RP</string>
+    <string name="tagline">Live • Roleplay • Multiplayer</string>
+
+    <!-- Home -->
+    <string name="btn_play">PLAY</string>
+    <string name="btn_news">NEWS / UPDATES</string>
+    <string name="btn_server_status">SERVER STATUS</string>
+    <string name="btn_update">DOWNLOAD / UPDATE</string>
+    <string name="btn_settings">SETTINGS</string>
+    <string name="btn_about">ABOUT</string>
+    <string name="status_checking">Checking server…</string>
+    <string name="status_online">ONLINE</string>
+    <string name="status_offline">OFFLINE</string>
+    <string name="players_format">%1$d / %2$d players</string>
+    <string name="version_format">v%1$s</string>
+
+    <!-- Update -->
+    <string name="phase_fetch_manifest">Fetching update manifest…</string>
+    <string name="phase_downloading">Downloading…</string>
+    <string name="phase_verifying">Verifying file integrity…</string>
+    <string name="phase_ready">Ready to play</string>
+    <string name="phase_failed">Update failed</string>
+    <string name="phase_error">Error</string>
+    <string name="detail_files_count">Manifest references %1$d files</string>
+    <string name="detail_file_of">[%1$d/%2$d] %3$s</string>
+    <string name="detail_failed">%1$s\n%2$s</string>
+    <string name="detail_complete">Installed %1$d files, %2$d failed</string>
+    <string name="action_play">PLAY</string>
+    <string name="action_retry">RETRY</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_server_host">Server host</string>
+    <string name="settings_server_port">Server port</string>
+    <string name="settings_manifest_url">Update manifest URL</string>
+    <string name="settings_launcher_version">Launcher version</string>
+    <string name="settings_website">Website</string>
+
+    <!-- About -->
+    <string name="about_title">About Grand Horizon RP</string>
+    <string name="about_body">Grand Horizon RP is a multiplayer roleplay client launcher. It checks the server, downloads the required client data with integrity verification, and launches the game client.</string>
+    <string name="credits_title">Third-party credits &amp; notices</string>
+    <string name="credits_body">
+        This launcher uses the following third-party libraries, each under their own license:\n\n
+        • AndroidX (Apache-2.0) — https://developer.android.com/jetpack/androidx\n
+        • Material Components for Android (Apache-2.0)\n
+        • OkHttp (Apache-2.0) — https://square.github.io/okhttp/\n
+        • Gson (Apache-2.0) — https://github.com/google/gson\n
+        • Kotlin Coroutines (Apache-2.0)\n\n
+        The supplied game client package additionally bundles OpenSSL, libcurl,
+        zlib-ng, Opus and BASS. Their respective notices must accompany any
+        redistribution — see docs/ASSETS.md.
+    </string>
+
+    <!-- Errors -->
+    <string name="err_generic">Unknown error</string>
+    <string name="err_server_unavailable">Server unavailable. Check your connection or try again later.</string>
+    <string name="err_manifest_unavailable">Update server unavailable. Cannot check for files.</string>
+    <string name="err_missing_files">Some required game files are missing. Tap Update to download them.</string>
+    <string name="err_corrupted">File integrity check failed. The download may be corrupted — retrying.</string>
+    <string name="err_insufficient_storage">Not enough storage to install game files. Free up space and retry.</string>
+    <string name="err_network">Network error. Check your connection.</string>
+    <string name="err_client_outdated">Your launcher is outdated. Please update to the latest version.</string>
+</resources>

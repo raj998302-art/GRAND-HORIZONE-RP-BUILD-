@@ -1,0 +1,124 @@
+name: Android Build (Grand Horizon RP Launcher)
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'launcher/android/**'
+      - '.github/workflows/android-build.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'launcher/android/**'
+  workflow_dispatch: {}
+
+concurrency:
+  group: android-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: launcher/android
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          sdk-platform: '34'
+          build-tools: '34.0.0'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ghrp-gradle-${{ runner.os }}-${{ hashFiles('launcher/android/**/*.gradle*', 'launcher/android/gradle.properties', 'launcher/android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: ghrp-gradle-${{ runner.os }}-
+
+      - name: Gradle wrapper (if missing)
+        run: |
+          if [ ! -f ./gradlew ]; then
+            gradle wrapper --gradle-version 8.8 --distribution-type bin
+          fi
+          chmod +x ./gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Build release APK (unsigned)
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Sign release APK (from GitHub Secrets)
+        if: github.ref == 'refs/heads/main'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "${KEYSTORE_BASE64:-}" ]; then
+            echo "::warning::Signing secrets not configured — release APK stays unsigned."
+            exit 0
+          fi
+          echo "${KEYSTORE_BASE64}" | base64 -d > "$RUNNER_TEMP/ghrp.keystore"
+          UNSIGNED=$(find app/build/outputs/apk/release -name "*release-unsigned.apk" | head -1)
+          [ -z "${UNSIGNED:-}" ] && { echo "::warning::No unsigned release APK found"; exit 0; }
+          OUT="$RUNNER_TEMP/app-release-signed.apk"
+          "$ANDROID_HOME/build-tools/34.0.0/zipalign" -p 4 "$UNSIGNED" "$OUT"
+          "$ANDROID_HOME/build-tools/34.0.0/apksigner" sign \
+            --ks "$RUNNER_TEMP/ghrp.keystore" \
+            --ks-pass "pass:${KEYSTORE_PASSWORD}" \
+            --ks-key-alias "${KEY_ALIAS}" \
+            --key-pass "pass:${KEY_PASSWORD}" \
+            --out "$OUT" "$UNSIGNED"
+          cp "$OUT" app/build/outputs/apk/release/app-release-signed.apk
+
+      - name: Verify release signing
+        run: |
+          SIGNED=$(find app/build/outputs/apk/release -name "*release-signed*.apk" | head -1 || true)
+          if [ -n "${SIGNED:-}" ]; then
+            "$ANDROID_HOME/build-tools/34.0.0/apksigner" verify --print-certs "$SIGNED"
+          else
+            echo "::warning::No signed release APK to verify (secrets not set)."
+          fi
+
+      - name: Collect APKs
+        run: |
+          mkdir -p artifacts
+          find app/build/outputs/apk -type f -name "*.apk" -exec cp {} artifacts/ \;
+          ls -la artifacts/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grand-horizon-rp-launcher-apk
+          path: launcher/android/artifacts/*.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload Gradle failure logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-failure-logs
+          path: |
+            launcher/android/app/build/reports/
+            launcher/android/app/build/outputs/logs/
+          if-no-files-found: ignore
+          retention-days: 7

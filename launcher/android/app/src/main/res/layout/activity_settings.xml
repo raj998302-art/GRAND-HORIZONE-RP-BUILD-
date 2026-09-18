@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ghr_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_title"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold"
+            android:textColor="@color/ghr_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/settings_server_host"
+            android:textColor="@color/ghr_text_muted" />
+        <TextView android:id="@+id/tvServerHost"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ghr_text" android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_server_port"
+            android:textColor="@color/ghr_text_muted" />
+        <TextView android:id="@+id/tvServerPort"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ghr_text" android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_manifest_url"
+            android:textColor="@color/ghr_text_muted" />
+        <TextView android:id="@+id/tvManifestUrl"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ghr_text" android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_launcher_version"
+            android:textColor="@color/ghr_text_muted" />
+        <TextView android:id="@+id/tvLauncherVersion"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ghr_text" android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_website"
+            android:textColor="@color/ghr_text_muted" />
+        <TextView android:id="@+id/tvWebsite"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ghr_text" android:textSize="14sp" />
+    </LinearLayout>
+</ScrollView>

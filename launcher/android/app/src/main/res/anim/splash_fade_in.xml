@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reproduces SplashScreen.xaml PresentAnimation: fade 0 -> 1.0 over ~1.5s, hold, fade out. -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:startOffset="800" />
+</set>
