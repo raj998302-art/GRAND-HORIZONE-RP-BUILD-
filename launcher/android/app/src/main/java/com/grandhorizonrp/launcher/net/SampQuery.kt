@@ -62,13 +62,13 @@ class SampQuery(private val host: String, private val port: Int) {
             bb.getShort() // players
             bb.getShort() // max players
             val hostLen = bb.getInt().toInt()
-            val hostname = String(data, bb.position, hostLen, Charsets.UTF_8)
+            val hostname = String(data, bb.position(), hostLen, Charsets.UTF_8)
             bb.position(bb.position() + hostLen)
             val gmLen = bb.getInt().toInt()
-            val gamemode = String(data, bb.position, gmLen, Charsets.UTF_8)
+            val gamemode = String(data, bb.position(), gmLen, Charsets.UTF_8)
             bb.position(bb.position() + gmLen)
             val mapLen = bb.getInt().toInt()
-            val mapName = String(data, bb.position, mapLen, Charsets.UTF_8)
+            val mapName = String(data, bb.position(), mapLen, Charsets.UTF_8)
 
             val players = bb.getShort(11 + 1).toInt() and 0xFFFF
             val maxPlayers = bb.getShort(11 + 1 + 2).toInt() and 0xFFFF
